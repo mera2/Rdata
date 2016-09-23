@@ -1,0 +1,72 @@
+---
+title: "Linear Regression Vignette"
+author: "Aqeel Ahmed,Marhawi Tewolde"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+# Package RC Class and Linreg function
+
+The main purpose of developing this package was to develop a Linreg function that calculates regression values by using the least square methods, and this function is incorporated in RC class, with some other functions.
+
+## Linreg Function Definition
+
+This function is taking two arguments(formula and data), and is performing the following calculations:
+
+  *Regression Coefficients
+  *Fitted Values
+  *The Residuals
+  *Degrees of Freedom
+  *Residual Varience
+  *Varience of Regression Coefficients
+  *T-values
+  
+The following code shows the calculations Performed by linreg function:
+```
+linreg<-function(formula,data)
+{
+  x<-model.matrix(formula,data)
+  y<-all.vars(formula)[1]
+  RC<-c((solve((t(x)%*%x))%*%t(x))%*%data[,y])
+  FV<-as.vector(x%*%RC)
+  RD<-c(as.matrix(data[,y]-FV))
+  DF<- nrow(data)-ncol(x)
+  RV<- c(t(RD)%*%RD)%/%DF
+  VRC<-RV*(solve(t(x)%*%x))
+  tvalues<-RC/sqrt(diag(VRC))
+  tvalues<-round(x=tvalues,digits = 2)
+}
+```
+
+
+  
+
+
+## Imoprtant funtions
+
+Mentioning some of the important functions incorporated with Lin_Class
+
+  *Coefficients()
+  *Resid()
+  *Pred()
+  
+The code for the above mentioned function:
+  
+   
+```{r}
+ resid = function() {
+      return(resd)
+    }
+    pred = function() {
+      return(fitted)
+    }
+    coef = function() {
+      return(resvariance) 
+    }
+```
+
