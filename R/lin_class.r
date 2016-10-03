@@ -8,20 +8,14 @@ lin_class <- setRefClass(
     df = "integer",
     resvariance = "numeric",
     varcoef = "numeric",
-    tvalues = "numeric"),
+    tvalues = "numeric"
+    ),
+  
   methods = list(
     print = function() {
       cat('Call:\n','linreg(formula = ',formula[2],'~',formula[3],", data = iris",")\n\n",sep = '',"coefficients:\n\n")
       colnames = names(beta)
       beta
-      
-    },
-    plot = function() {
-      library ( ggplot2 )
-      
-        ggplot ( data = iris) +
-        aes(x=ls$fitted,y =ls$resd ) +
-        geom_line()
       
     },
     resid = function() {
